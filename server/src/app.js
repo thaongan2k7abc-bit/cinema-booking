@@ -1,3 +1,4 @@
+import routes from "./routes/index.js";
 import express from "express";
 import cors from "cors";
 
@@ -12,6 +13,7 @@ app.get("/api/health", (req, res) => {
 });
 
 // Đường dẫn không tồn tại
+app.use("/api", routes);
 app.use((req, res) => {
   res.status(404).json({ message: "Không tìm thấy đường dẫn" });
 });
