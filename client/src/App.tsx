@@ -20,7 +20,7 @@ export default function App() {
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/showtimes/:id/seats" element={<SeatSelectionPage />} />
           <Route path="/my-tickets" element={<MyTicketsPage />} />
-          <Route path="/admin" element={<AdminDashboardPage />} />
+          <Route path="/admin/*" element={<AdminDashboardPage />} />
           <Route path="*" element={<h2>404 - Không tìm thấy trang</h2>} />
         </Routes>
       </main>

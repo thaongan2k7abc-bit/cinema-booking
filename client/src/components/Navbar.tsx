@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 export default function Navbar() {
   return (
     <nav className="navbar">
-      <Link to="/">Rạp phim mini</Link>
+      <Link to="/">Rạp phim </Link>
       <Link to="/my-tickets">Vé của tôi</Link>
       <Link to="/admin">Quản trị</Link>
       <span style={{ marginLeft: "auto" }} />
