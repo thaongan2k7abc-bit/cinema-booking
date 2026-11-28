@@ -53,3 +53,8 @@
   font-size: 14px;
   text-align: center;
 }
+.auth-success {
+  margin-top: 12px;
+  color: #15803d;
+  font-size: 14px;
+}

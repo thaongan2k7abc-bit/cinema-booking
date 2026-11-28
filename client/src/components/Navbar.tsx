@@ -20,7 +20,7 @@ export default function Navbar() {
       <span style={{ marginLeft: "auto" }} />
       {user ? (
         <>
-          <span style={{ color: "#fff" }}>Xin chào, {user.name}</span>
+          <Link to="/account">Xin chào, {user.name}</Link>
           <button onClick={handleLogout}>Đăng xuất</button>
         </>
       ) : (

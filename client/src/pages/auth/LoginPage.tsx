@@ -1,6 +1,6 @@
 import { useState } from "react";
 import type { FormEvent } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { isAxiosError } from "axios";
 import api from "../../api/axios";
 import { useAppDispatch } from "../../store/hooks";
@@ -15,6 +15,8 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = (location.state as { from?: string } | null)?.from ?? "/";
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
@@ -26,7 +28,7 @@ export default function LoginPage() {
         password,
       });
       dispatch(loginSuccess(res.data));
-      navigate("/");
+      navigate(from, { replace: true });
     } catch (err) {
       setError(
         isAxiosError(err)
