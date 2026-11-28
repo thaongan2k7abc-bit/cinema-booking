@@ -1,16 +1,15 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 
-const API = "http://localhost:5000/api/movies"; // sửa theo port server của bạn
+const API = "http://localhost:5000/api/movies";
 
-// Lấy ID video từ các dạng link YouTube phổ biến
 function getYoutubeId(url?: string) {
   if (!url) return null;
   const m = url.match(/(?:youtu\.be\/|v=|embed\/)([\w-]{11})/);
   return m ? m[1] : null;
 }
 
-const today = () => new Date().toLocaleDateString("en-CA"); // YYYY-MM-DD theo giờ máy
+const today = () => new Date().toLocaleDateString("en-CA");
 
 export default function MovieDetailPage() {
   const { id } = useParams();
@@ -43,14 +42,12 @@ export default function MovieDetailPage() {
       <Link to="/movies">← Quay lại danh sách</Link>
 
       <div style={{ display: "flex", gap: 24, flexWrap: "wrap", marginTop: 16 }}>
-        {movie.poster && <img src={movie.poster} alt={movie.title} style={{ width: 240, borderRadius: 8 }} />}
+        {movie.posterUrl && <img src={movie.posterUrl} alt={movie.title} style={{ width: 240, borderRadius: 8 }} />}
         <div style={{ flex: 1, minWidth: 260 }}>
           <h2>{movie.title}</h2>
-          <p><b>Thể loại:</b> {movie.genre?.join(", ")}</p>
+          <p><b>Thể loại:</b> {movie.genres?.join(", ")}</p>
           <p><b>Thời lượng:</b> {movie.duration} phút</p>
-          {movie.releaseDate && (
-            <p><b>Khởi chiếu:</b> {new Date(movie.releaseDate).toLocaleDateString("vi-VN")}</p>
-          )}
+          <p><b>Trạng thái:</b> {movie.status === "coming_soon" ? "Sắp chiếu" : "Đang chiếu"}</p>
           <p>{movie.description}</p>
         </div>
       </div>
@@ -77,7 +74,7 @@ export default function MovieDetailPage() {
           {showtimes.map((s) => (
             <Link
               key={s._id}
-              to={`/booking/${s._id}`} // sang trang chọn ghế (chức năng 3)
+              to={`/booking/${s._id}`}
               style={{ border: "1px solid #999", borderRadius: 6, padding: "8px 14px", textDecoration: "none" }}
             >
               <b>{new Date(s.startTime).toLocaleTimeString("vi-VN", { hour: "2-digit", minute: "2-digit" })}</b>
